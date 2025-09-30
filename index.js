@@ -1,5 +1,14 @@
 console.log('PROJECT: Etch-a-Sketch')
 
+// a random colour for mouse each square hover
+function getRandomColour(rgb){
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 // Add title to the webpage (h1)
 const title = document.createElement('h1');
     title.textContent = 'Project Etch-a-Sketch'
@@ -26,11 +35,13 @@ for (let i = 0; i < 16; i++){
     for (let j = 0; j < 16; j++){
         // create square 
         const square = document.createElement('div');
-        square.classList.add('square')
-        
+        square.style.opacity = 0;
+        square.classList.add('square')     
         // adding the listener when the mouse hover the square
         square.addEventListener("mouseover", () => {
-            square.setAttribute("style", "background-color: black;")
+            square.style.backgroundColor = getRandomColour();
+            let currentOpacity = parseFloat(square.style.opacity) || 0;
+            square.style.opacity = currentOpacity + 0.1;
         })
 
         // append the square to container
@@ -40,7 +51,6 @@ for (let i = 0; i < 16; i++){
 
 // add event listener to ask how many user want the square
 buttonInput.addEventListener('click', () => {
-    
     // Ask user to input a number for how much square 
     let userInput = parseInt(prompt("Enter a number: "));
     // case handle if user's input
@@ -61,19 +71,19 @@ buttonInput.addEventListener('click', () => {
         for(let j = 0; j < userInput; j++){
             // Create square after user input
             const square = document.createElement('div');
+            square.style.opacity = 0;
             square.classList.add('square')
             square.style.height = squareSize+'px';
             square.style.width = squareSize+'px';
 
             // adding the listener when the mouse hover the square (after user input)
             square.addEventListener('mouseover', () => {
-                square.setAttribute('style', 'background-color: blue;')
-                square.style.height = squareSize+'px';
-                square.style.width = squareSize+'px';
+                square.style.backgroundColor = getRandomColour();
+                square.style.opacity = 1;
             })
 
             // append the square to container (after user input)
             container.appendChild(square);
         }
     }
-})
+});
