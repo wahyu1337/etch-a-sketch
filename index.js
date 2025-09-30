@@ -16,6 +16,7 @@ const buttonInput = document.createElement('button');
     document.body.append(buttonInput);
 
 // adding a divs
+const div = document.querySelector('div');
 const container = document.createElement('div')
     container.classList.add('container');
     document.body.append(container);
@@ -39,9 +40,40 @@ for (let i = 0; i < 16; i++){
 
 // add event listener to ask how many user want the square
 buttonInput.addEventListener('click', () => {
-    const userInput = parseInt(prompt("Enter a number: ", 0));
+    
+    // Ask user to input a number for how much square 
+    let userInput = parseInt(prompt("Enter a number: "));
+    // case handle if user's input
+        while (isNaN(userInput)){
+            userInput = parseInt(prompt("Please enter a number only!"));
+        }
+    // case hundle if more than 100
+        while (userInput > 100){
+            userInput = parseInt(prompt("Number max is 100, please re-enter the number!"))
+        }
+    console.log(userInput); // logs the user input
 
-    while (userInput === isNaN(userInput)){
-        userInput = parseInt(prompt('you must enter a number!', 0))
+    let squareSize = 960 / userInput;
+    console.log(`square size is: ${squareSize}`);
+    container.replaceChildren();
+
+    for(let i = 0; i < userInput; i++){
+        for(let j = 0; j < userInput; j++){
+            // Create square after user input
+            const square = document.createElement('div');
+            square.classList.add('square')
+            square.style.height = squareSize+'px';
+            square.style.width = squareSize+'px';
+
+            // adding the listener when the mouse hover the square (after user input)
+            square.addEventListener('mouseover', () => {
+                square.setAttribute('style', 'background-color: blue;')
+                square.style.height = squareSize+'px';
+                square.style.width = squareSize+'px';
+            })
+
+            // append the square to container (after user input)
+            container.appendChild(square);
+        }
     }
 })

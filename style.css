@@ -3,15 +3,17 @@ body{
 }
 
 .container {
-    margin: 0 10px;
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
+    border:solid red 2px;
     height: 960px;
     width: 960px;
 }
 
 .square {
     height: 60px;
-    width: 60px;
+    width: 60px;    
     border: solid black 2px;
+    box-sizing: border-box;
 }
